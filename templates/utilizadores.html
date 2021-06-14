@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% set active_page = "utiizadores" %}
+
+{% block title %}Utilizadores Registados{% endblock title %}
+
+{% block content %}
+<h3>Utilizadores registados</h3>
+
+<ul>
+{% for i in utilizadores %}
+    <li><a href="/utilizadores/{{ user.id }}">{{ user.nome }}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock content %}

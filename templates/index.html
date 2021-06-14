@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% set active_page = "index" %}
+
+{% block content %}
+
+<div class="corpo container-fluid"></div>
+    <h1 class="row justify-content-center">Bem vindo ao serviço de Web Chat do Rui Pereira</h1>
+
+    {% if not user %}
+    
+    <p class="disclaimer row justify-content-center"> Por favor faz o teu registo ou login para teres acesso a todo o conteudo do Web Chat</p>
+
+    <div class="row justify-content-around">
+    <div class="col-5 d-flex justify-content-center">
+      <!-- formulario login -->
+      <form action="/login/" method="POST">
+        <h3>Login</h3>
+        <br>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="O teu email" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password_user" placeholder="A tua password" required>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary justify-content-center">Login</button>
+      </form>
+    </div>
+
+    <div class="col-5 d-flex justify-content-center">
+      <!-- formulario registo -->
+        <form action="/registo/" method="POST">
+          <h3>Login</h3>
+        <br>
+        <div class="form-group">
+            <label for="utilizador">Nome</label>
+            <input type="text" class="form-control" name="utilizador" placeholder="Como queres ser tratado" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="O teu email" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password_user" placeholder="A tua password" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="password">Confirma a Password</label>
+            <input type="password" class="form-control" name="password_user2" placeholder="Confirma a tua password" required>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary justify-content-center">Registar</button>
+    </form>
+    </div>
+
+    </div>
+    
+    
+    
+
+    
+    {% else %}
+    <a class="btn btn-secondary" href="/registo/" role="button" >Login</a>
+    {% endif %}
+
+</div>
+
+{% endblock content %}

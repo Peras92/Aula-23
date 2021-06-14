@@ -1,0 +1,68 @@
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="author" content="Rui Pereira">
+
+  <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/perfect-scrollbar@1.5.0/css/perfect-scrollbar.css">
+  
+  <!--Geral-->
+  <title>{% block title %}Serviço de Webchat{% endblock title %}</title>
+  <link rel="stylesheet" href="/static/css/geral.css">
+
+  <!--<link rel="shortcut icon" type="image" href="/static/img/Tenda.png"/> -->
+
+</head>
+
+<body>
+  <div class="corpo">
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Web Chat</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="/">Inicio</a>
+            {% if user %}
+            <a class="nav-link" href="#">Enviar mensagens</a>
+            <a class="nav-link" href="#">Conversas mantidas</a>
+            <a class="nav-link" href="#">Utilizadores registados</a>
+            {% endif %}
+            <a class="nav-link" href="#">Metereologia</a>
+            <a class="nav-link" href="#">Sobre mim</a>
+          </div>
+        </div>
+      </div>
+
+    <!-- código para login /logout -->
+      {% if user %}
+      <span class="navbar-brand mb-0 h1">Olá <a href="/profile/">{{user.nome}}</a></span>
+      <a class="btn btn-secondary" href="/logout/" role="button" >Logout</a>
+      {% else %}
+      <a class="btn btn-secondary bt-login" href="/Login/" role="button" >Login</a>  
+      <a class="btn btn-secondary" href="/registo/" role="button" >Registar</a>
+      {% endif %}
+     
+    </nav>
+    <!--/Navbar-->
+
+    {% block content %}
+
+    {% endblock content %}
+
+  </div> <!--/corpo-->
+
+</body>
+
+
+
+</html>

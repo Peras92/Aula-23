@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% set active_page = "profile" %}
+
+{% block content %}
+ 
+<div class="corpo"></div>
+    <h1 class="row justify-content-center">Bem vindos à tua página de perfil</h1>
+
+    <h3>Edita o teu perfil</h3>
+
+    <form method="POST">
+        <div class="form-group col-5 justify-content-center">
+            <label for="utilizador">Nome</label>
+            <input type="text" class="form-control" name="utilizador" value="{{user.nome}}">
+        </div>
+        <br>
+        <div class="form-group col-5 justify-content-center">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" value="{{user.email}}">
+        </div>
+        <br>
+        <div class="form-group col-5 justify-content-center">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password_user">
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary justify-content-center">Registar alterações</button>
+
+    </form>
+    
+        <p><a href="/profile/delete">Apagar Perfil</a></p>
+</div>
+
+{% endblock content %}

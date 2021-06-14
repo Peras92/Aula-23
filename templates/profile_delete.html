@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}Delete profile{% endblock title %}
+
+{% block content %}
+<h3>Apagar o teu perfil</h3>
+
+<form method="post">
+    <p>Queres mesmo apagar de forma permanente o teu perfil?</p>
+
+    <button class="btn btn-secondary">Sim, apagar!</button> ou <a href="/profile/">cancelar</a>
+</form>
+{% endblock content %}

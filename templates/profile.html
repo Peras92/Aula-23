@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% set active_page = "profile" %}
+
+{% block content %}
+ 
+<div class="corpo"></div>
+    <h1 class="row justify-content-center">Bem vindos à tua página de perfil</h1>
+
+    <p><strong>O teu nome:</strong> {{ user.nome }}</p>
+    <p><strong>O teu email:</strong> {{ user.email }}</p>
+    
+    <p><a href="/profile/edit/">Editar Perfil</a></p>
+    <p><a href="/profile/delete">Apagar Perfil</a></p>
+</div>
+
+{% endblock content %}
