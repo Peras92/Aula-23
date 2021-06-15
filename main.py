@@ -19,6 +19,94 @@ def index():
     
     return render_template("index.html", user=user)
 
+@app.route("/login/", methods=["POST"])
+def login():
+    email = request.form.get("email")
+    password = request.form.get("password_user")
+
+    # hash the password
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+    user = db.query(User).filter_by(email=email).first()
+
+    # TODO - fazer pagina padrão de erros, e só mudar a mensagem com base num dicionario 
+    # if not user:
+        # enviar para pagina padrão de erros, com a mensagem a dizer que não está registado
+
+    if hashed_password != user.password:
+        return "PASSWORD Incorrecta! Por favor volta a tentar." #adicionar também à pagina de erros padrao
+
+    elif hashed_password == user.password:
+        # create a random session token for this user
+        session_token = str(uuid.uuid4())
+
+        # save the session token in a database
+        user.session_token = session_token
+        user.save()
+        
+        # save user's session token into a cookie
+        response = make_response(redirect(url_for("index", user=user)))
+        response.set_cookie("session_token", session_token, httponly=True, samesite='Strict')
+
+        return response
+
+@app.route("/registo/", methods=["POST"])
+def registo():
+        utilizador = request.form.get("utilizador")
+        email = request.form.get("email")
+        password = request.form.get("password_user")
+        password2 = request.form.get("password_user2")
+
+        # hash the password's
+        hashed_password = hashlib.sha256(password.encode()).hexdigest()
+        hashed_password2 = hashlib.sha256(password2.encode()).hexdigest()
+
+        
+
+        user = db.query(User).filter_by(email=email).first()
+
+        if not user:
+        # create a User object
+            user = User(nome=utilizador, email=email, password=hashed_password, activo = True)
+
+# @app.route("/registo/", methods=["GET", "POST"])
+# def registo():
+#     if request.method == "GET":
+#         return render_template("registo.html")
+
+#     else:
+        # utilizador = request.form.get("utilizador")
+        # email = request.form.get("email")
+        # password = request.form.get("password_user")
+
+        # # hash the password
+        # hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+        # user = db.query(User).filter_by(email=email).first()
+
+        # if not user:
+        # # create a User object
+        #     user = User(nome=utilizador, email=email, password=hashed_password, activo = True)
+
+#         # save the user object into a database
+#         user.save()
+
+        # if hashed_password != user.password:
+        #     return "WRONG PASSWORD! Go back and try again."
+
+        # elif hashed_password == user.password:
+        #     # create a random session token for this user
+        #     session_token = str(uuid.uuid4())
+
+        #     # save the session token in a database
+        #     user.session_token = session_token
+        #     user.save()
+            
+        #     # save user's email into a cookie
+        #     response = make_response(redirect(url_for("index")))
+        #     response.set_cookie("session_token", session_token, httponly=True, samesite='Strict')
+
+        #     return response
 
    
 @app.route("/mural/", methods=["GET"])
@@ -48,44 +136,7 @@ def add_message():
 
     return redirect("/mural")
 
-@app.route("/registo/", methods=["GET", "POST"])
-def registo():
-    if request.method == "GET":
-        return render_template("registo.html")
 
-    else:
-        utilizador = request.form.get("utilizador")
-        email = request.form.get("email")
-        password = request.form.get("password_user")
-
-        # hash the password
-        hashed_password = hashlib.sha256(password.encode()).hexdigest()
-
-        user = db.query(User).filter_by(email=email).first()
-
-        if not user:
-        # create a User object
-            user = User(nome=utilizador, email=email, password=hashed_password, activo = True)
-
-        # save the user object into a database
-        user.save()
-
-        if hashed_password != user.password:
-            return "WRONG PASSWORD! Go back and try again."
-
-        elif hashed_password == user.password:
-            # create a random session token for this user
-            session_token = str(uuid.uuid4())
-
-            # save the session token in a database
-            user.session_token = session_token
-            user.save()
-            
-            # save user's email into a cookie
-            response = make_response(redirect(url_for("index")))
-            response.set_cookie("session_token", session_token, httponly=True, samesite='Strict')
-
-            return response
 
 @app.route("/profile/", methods=["GET"])
 def profile():
