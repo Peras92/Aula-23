@@ -61,13 +61,34 @@ def registo():
         hashed_password = hashlib.sha256(password.encode()).hexdigest()
         hashed_password2 = hashlib.sha256(password2.encode()).hexdigest()
 
-        
+        #TODO - enviar para a página de erro geral
+        # if hashed_password != hashed_password2:
+            # enviar para a página de erro
 
         user = db.query(User).filter_by(email=email).first()
 
+        # if user:
+        #     # enviar para pagina de erro a dizer que já há um utilizador registado com esse mail
+
         if not user:
-        # create a User object
+            # create a User object
             user = User(nome=utilizador, email=email, password=hashed_password, activo = True)
+
+            user.save() # save the user object into a database
+
+        # create a random session token for this user
+        session_token = str(uuid.uuid4())
+
+        # save the session token in a database
+        user.session_token = session_token
+        user.save()
+
+        # save user's session token into a cookie
+        response = make_response(redirect(url_for("index")))
+        response.set_cookie("session_token", session_token, httponly=True, samesite='Strict')
+
+        return response
+
 
 # @app.route("/registo/", methods=["GET", "POST"])
 # def registo():
