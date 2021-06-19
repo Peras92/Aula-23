@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="corpo container-fluid"></div>
+<div class="corpo container-fluid">
     <h1 class="row justify-content-center">Bem vindo ao serviço de Web Chat do Rui Pereira</h1>
 
     {% if not user %}
@@ -61,12 +61,23 @@
 
     </div>
     
-    
-    
-
-    
+         
     {% else %}
-    
+  <div class="row justify-content-center">
+    <div class="col-3">
+      <h2> Bem vindo {{user.nome}} </h2>
+      <p>O que queres fazer?</p>
+      <ul class="oQueFazer">
+        <li><a href="#">Consultar o teu perfil</a></li>
+        <li><a href="#">Ver o estado do tempo</a></li>
+        <li><a href="#">Consultar utilizadores </a></li>
+        <li><a href="#">Ver mensagens recebidas</a></li>
+        <li><a href="#">Enviar mensagem a alguém</a></li>
+      </ul>
+    </div>
+    </div>
+
+  </div>
 
     {% endif %}
 

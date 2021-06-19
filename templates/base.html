@@ -31,9 +31,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link" href="/">Inicio</a>
+            <a {%if active_page == "index" %} class="nav-link active" {% endif%} class="nav-link" href="/">Inicio</a>
             {% if user %}
-            <a class="nav-link" href="#">Enviar mensagens</a>
+            <a {%if active_page == "mensagem" %} class="nav-link active" {% endif%} class="nav-link" href="#">Enviar mensagens</a>
             <a class="nav-link" href="#">Conversas mantidas</a>
             <a class="nav-link" href="#">Utilizadores registados</a>
             {% endif %}
