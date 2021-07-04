@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% set active_page = "meteo" %}
+{% block title %}Meteorologia{% endblock title %}
+
+{% block content %}
+    
+<p> Actualmente em {{ data.name }} está {{ data.weather[0].description }} e a temperatura sentida são {{ data.main.temp }}ºC </p>
+
+
+{% endblock content %}

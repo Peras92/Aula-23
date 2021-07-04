@@ -3,7 +3,27 @@
 
 {% block content %}
 <div class="container-fluid">
-    
+    <div class="container text-center">
+        <h1>Um chat simples</h1>
+
+        <form action="/envia-mensagem" method="POST">
+            <span>De: <input name="remetente" value={{user.nome}} disabled> </span>
+            <br><br>
+            <span>Para:  <select id="destinatario" name="destinatario">
+                {% for i in utilizadores %}
+                <option value="{{ utilizadores.user_id }}">{{ utilizadores.nome }}</option>
+                {% endfor %}
+                </select>
+                </span>
+            <br><br>
+            
+            <textarea placeholder="Escreve a tua mensagem" name="texto" rows="10" cols="30"></textarea>
+            
+            <br><br>
+
+            <button type="submit">Enviar mensagem</button>
+
+        </form>
 
 
 

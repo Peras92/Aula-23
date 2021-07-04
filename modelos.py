@@ -7,7 +7,7 @@ db = SQLAlchemy(db_url)
 
 # cria objecto user, que é guardado na BD
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String, unique=True)
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
@@ -15,9 +15,11 @@ class User(db.Model):
     activo = db.Column(db.Boolean, default = True)
 
 class Mensagem(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    utilizador = db.Column(db.String, unique=False)
+    mensagem_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, unique=False)
+    destinatario = db.Column(db.String, unique=False)
     texto = db.Column(db.String, unique=False)
+
 
 #função para validar se o utilizar está logado
 def utilizador_reg():

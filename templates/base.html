@@ -33,11 +33,11 @@
           <div class="navbar-nav">
             <a {%if active_page == "index" %} class="nav-link active" {% endif%} class="nav-link" href="/">Inicio</a>
             {% if user %}
-            <a {%if active_page == "mensagem" %} class="nav-link active" {% endif%} class="nav-link" href="#">Enviar mensagens</a>
+            <a {%if active_page == "mensagem" %} class="nav-link active" {% endif%} class="nav-link" href="/mensagens/">Enviar mensagens</a>
             <a class="nav-link" href="#">Conversas mantidas</a>
             <a class="nav-link" href="#">Utilizadores registados</a>
             {% endif %}
-            <a class="nav-link" href="#">Metereologia</a>
+            <a {%if active_page == "meteo" %} class="nav-link active" {% endif%} class="nav-link" href="/meteo/">Meteorologia</a>
             <a class="nav-link" href="#">Sobre mim</a>
           </div>
         </div>
@@ -48,8 +48,8 @@
       <span class="navbar-brand mb-0 h1">Olá <a href="/profile/">{{user.nome}}</a></span>
       <a class="btn btn-secondary" href="/logout/" role="button" >Logout</a>
       {% else %}
-      <a class="btn btn-secondary bt-login" href="/Login/" role="button" >Login</a>  
-      <a class="btn btn-secondary" href="/registo/" role="button" >Registar</a>
+      <a class="btn btn-secondary bt-login" href="/" role="button" >Login</a>  
+      <a class="btn btn-secondary" href="/" role="button" >Registar</a>
       {% endif %}
      
     </nav>

@@ -4,7 +4,12 @@ from sqlalchemy_pagination import paginate
 import uuid
 import hashlib
 from modelos import User, db, Mensagem, utilizador_reg
-
+import os
+try:
+    import secreto
+except ImportError as e:
+    pass
+import requests
  
 app = Flask(__name__)
 
@@ -89,8 +94,30 @@ def registo():
 
         return response
 
+@app.route("/meteo/", methods=["GET", "POST"])
+def meteo():
+    user = utilizador_reg()
+    localizacao = "lisboa, PT" #TODO adicionar form para mudar loc
+    unidade = "metric"
+    api_key = os.environ["api_key"]
 
-   
+    url = "https://api.openweathermap.org/data/2.5/weather?q={0}&units={1}&appid={2}&lang=pt".format(localizacao, unidade, api_key)
+
+    data = requests.get(url=url)  # GET request to the OpenWeatherMap API
+
+    return render_template("meteo.html",user=user, data=data.json())
+
+@app.route("/mensagens/",  methods=["GET", "POST"])
+def mensagem():
+    user = utilizador_reg()
+    utilizadores = db.query(User).all()
+
+    print(utilizadores)
+    if not user:
+        return render_template("index.html", user=user)
+
+    return render_template("mensagens.html", user=user, utilizadores=utilizadores)
+
 # @app.route("/mural/", methods=["GET"])
 # def mural():
 #     user = utilizador_reg()
